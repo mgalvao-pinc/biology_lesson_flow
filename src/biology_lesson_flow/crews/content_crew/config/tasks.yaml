@@ -1,0 +1,78 @@
+research_task:
+  description: >
+    Pesquise e compile informações completas sobre o tema de Biologia: {topic}
+
+    Sua pesquisa deve cobrir:
+    - Definição clara e conceitos fundamentais
+    - Processos e mecanismos principais envolvidos
+    - Importância biológica e aplicações práticas no cotidiano
+    - Exemplos concretos e casos reais
+    - Terminologia científica essencial
+    - Conexões com outros temas de Biologia
+
+    Use a ferramenta de busca para encontrar informações atualizadas e confiáveis.
+    Organize tudo de forma estruturada para facilitar a criação da aula.
+  expected_output: >
+    Um relatório de pesquisa detalhado sobre {topic} com todos os conceitos-chave,
+    processos, exemplos práticos e terminologia relevante, organizado por subtópicos
+    e pronto para ser usado na construção de uma aula didática.
+  agent: researcher
+
+lesson_task:
+  description: >
+    Com base no relatório de pesquisa fornecido, crie uma aula completa e didática
+    sobre {topic} seguindo obrigatoriamente esta estrutura:
+
+    1. INTRODUÇÃO
+       - Contextualização do tema
+       - Por que este tema é importante?
+       - O que o aluno vai aprender nesta aula?
+
+    2. SEÇÕES DE CONTEÚDO (mínimo 3 seções)
+       - Cada seção com título claro
+       - Explicação detalhada do subtópico
+       - Pelo menos 2 exemplos práticos por seção
+
+    3. RESUMO
+       - Síntese dos 5 pontos mais importantes da aula
+
+    4. QUESTÕES DE AVALIAÇÃO (mínimo 5 questões)
+       - Mix de questões abertas e de múltipla escolha
+       - Diferentes níveis de dificuldade
+       - Respostas esperadas para cada questão
+
+    IMPORTANTE: Use a ferramenta lesson_structure_validator para verificar
+    se a estrutura está completa antes de finalizar. Se a validação apontar
+    itens ausentes, corrija-os.
+
+    Linguagem clara e adequada para estudantes do ensino médio.
+  expected_output: >
+    Uma aula completa e bem estruturada sobre {topic}, com introdução envolvente,
+    mínimo 3 seções de conteúdo com exemplos práticos, resumo dos pontos principais
+    e mínimo 5 questões avaliativas com respostas esperadas. Estrutura validada
+    pela ferramenta.
+  agent: lesson_builder
+
+review_task:
+  description: >
+    Revise criteriosamente a aula de Biologia sobre {topic} produzida anteriormente.
+
+    PASSO 1: Use a ferramenta review_checker para obter o checklist completo.
+
+    PASSO 2: Para cada critério do checklist, analise a aula e indique:
+    - ✅ APROVADO: critério plenamente atendido
+    - ⚠️ PARCIAL: critério parcialmente atendido (explique o que falta)
+    - ❌ REPROVADO: critério não atendido (explique o problema)
+
+    PASSO 3: Emita um VEREDITO GERAL:
+    - APROVADA: todos os critérios aprovados
+    - APROVADA COM RESSALVAS: maioria aprovada, ressalvas menores
+    - REPROVADA: um ou mais critérios críticos reprovados
+
+    PASSO 4: Liste sugestões específicas de melhoria (se houver).
+  expected_output: >
+    Um parecer de revisão completo da aula sobre {topic}, com avaliação detalhada
+    de cada critério do checklist (precisão científica, coerência, ordem lógica,
+    qualidade dos exemplos, validade das questões), veredito geral fundamentado
+    e lista de sugestões de melhoria quando aplicável.
+  agent: reviewer
