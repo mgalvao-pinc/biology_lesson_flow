@@ -1,3 +1,4 @@
+import inspect
 import unittest
 
 from biology_lesson_flow.main import kickoff, plot, run_with_trigger, sanitize_filename
@@ -8,6 +9,10 @@ class TestMainEntrypoints(unittest.TestCase):
         self.assertTrue(callable(kickoff))
         self.assertTrue(callable(plot))
         self.assertTrue(callable(run_with_trigger))
+
+    def test_kickoff_accepts_topic_without_interactive_input(self):
+        topic_parameter = inspect.signature(kickoff).parameters["topic"]
+        self.assertIsNone(topic_parameter.default)
 
     def test_filename_sanitization_removes_accents_and_invalid_chars(self):
         self.assertEqual(sanitize_filename("Fotossíntese"), "Fotossintese")

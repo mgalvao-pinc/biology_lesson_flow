@@ -1,4 +1,8 @@
 .env
+.venv/
 __pycache__/
 lib/
+logs/
+aula_*.md
+*.pyc
 .DS_Store

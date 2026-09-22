@@ -181,6 +181,7 @@ class BiologyLessonFlow(Flow[BiologyLessonState]):
         try:
             resultado = BiologyLessonCrew().crew().kickoff(inputs={"topic": self.state.topic})
             markdown_path = save_markdown_output(self.state.topic, resultado)
+            markdown_content = markdown_path.read_text(encoding="utf-8")
             logger.info("Arquivo Markdown gerado em: %s", markdown_path)
             logger.info("Sessão concluída com sucesso")
         except Exception:
@@ -193,11 +194,12 @@ class BiologyLessonFlow(Flow[BiologyLessonState]):
         print(f"📝 Log da sessão: {log_path.name}")
         print("=" * 60)
 
-        return resultado
+        return markdown_content
 
 
-def kickoff():
-    topic = input("\nDigite o tema de Biologia: ").strip()
+def kickoff(topic: str | None = None):
+    if topic is None:
+        topic = input("\nDigite o tema de Biologia: ").strip()
     if not topic:
         topic = "Fotossíntese"
         print(f"Nenhum tema informado. Usando padrão: '{topic}'")

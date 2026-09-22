@@ -85,6 +85,34 @@ O arquivo gerado contém:
 - questões e respostas esperadas
 - avaliação final do revisor
 
+## Preparação para CrewAI AMP
+
+O projeto já está configurado como Flow no `pyproject.toml`, possui `uv.lock` e tem um `project_id` para o AMP. O Flow recebe `topic` como entrada e retorna o Markdown da aula; o arquivo local continua sendo salvo para execuções locais.
+
+Antes do deploy, configure no AMP as variáveis usadas pelos agentes e ferramentas:
+
+```text
+GOOGLE_API_KEY=...
+SERPER_API_KEY=...
+```
+
+Com o repositório publicado no GitHub, os comandos a executar são:
+
+```bash
+uv sync
+crewai login
+crewai deploy create
+crewai deploy status
+```
+
+Para validar localmente o mesmo tipo de entrada sem interação:
+
+```bash
+uv run python -c "from biology_lesson_flow.main import BiologyLessonFlow; print(BiologyLessonFlow().kickoff(inputs={'topic': 'Poríferos'}))"
+```
+
+Não é necessário executar `crewai login` ou qualquer comando de deploy durante o desenvolvimento. Nunca versionar o arquivo `.env`, chaves de API, logs ou aulas geradas.
+
 ## Logs
 
 Cada execução cria um registro em `logs/`, com nome no formato:
